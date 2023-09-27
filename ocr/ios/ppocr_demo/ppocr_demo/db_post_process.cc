@@ -264,6 +264,8 @@ BoxesFromBitmap(const cv::Mat pred, const cv::Mat bitmap,
   int num_contours =
       contours.size() >= max_candidates ? max_candidates : contours.size();
 
+  std::cout << "number of potential boxes: " << num_contours << std::endl;
+
   std::vector<std::vector<std::vector<int>>> boxes;
 
   for (int i = 0; i < num_contours; i++) {
