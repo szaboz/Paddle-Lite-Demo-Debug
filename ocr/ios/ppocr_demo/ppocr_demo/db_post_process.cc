@@ -277,6 +277,15 @@ BoxesFromBitmap(const cv::Mat pred, const cv::Mat bitmap,
     auto box_for_unclip = array;
     // end get_mini_box
 
+    std::cout << "box_for_unclip: " << std::endl;
+    // i print out the box_for_unclip
+    for (int i = 0; i < 4; i++) {
+       std::cout << box_for_unclip[i][0] << " " << box_for_unclip[i][1] <<
+       std::endl;
+    }
+    //print out the ssid
+    std::cout << "ssid: " << ssid << std::endl;
+
     if (ssid < min_size) {
       continue;
     }
@@ -287,6 +296,10 @@ BoxesFromBitmap(const cv::Mat pred, const cv::Mat bitmap,
     } else {
       score = BoxScoreFast(array, pred);
     }
+
+    // print the score and the box_thresh to see the result
+    std::cout << score << " < " << box_thresh << std::endl;
+
     // end box_score_fast
     if (score < box_thresh)
       continue;
@@ -321,6 +334,14 @@ BoxesFromBitmap(const cv::Mat pred, const cv::Mat bitmap,
                     float(dest_height)))};                        // NOLINT
       intcliparray.push_back(a);
     }
+
+    //print contents of intcliparray
+    std::cout << "unclipped box: " << std::endl;
+    for (int i = 0; i < 4; i++) {
+       std::cout << intcliparray[i][0] << " " << intcliparray[i][1] <<
+       std::endl;
+    }
+
     boxes.push_back(intcliparray);
   }
   return boxes;
